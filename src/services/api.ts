@@ -46,7 +46,6 @@ api.interceptors.response.use(
       "An error occurred";
     if (error.response?.status === 401) {
       localStorage.removeItem("auth-storage");
-
       toast.error("Session expired. Please login again.");
     } else if (error.response?.status === 403) {
       toast.error("Access denied");
@@ -60,6 +59,42 @@ api.interceptors.response.use(
       toast.error(message);
     }
 
+    return Promise.reject(error);
+  }
+);
+
+// Create a separate API instance for public endpoints (no auth required)
+export const publicApi = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:8080/api",
+  timeout: 10000,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+// Response interceptor for public API (no auth-related error handling)
+publicApi.interceptors.response.use(
+  (response: AxiosResponse) => {
+    return response;
+  },
+  (error: AxiosError<ApiError>) => {
+    const errorData = error.response?.data;
+    const message =
+      errorData?.error ||
+      errorData?.message ||
+      error.message ||
+      "An error occurred";
+    
+    if (error.response?.status === 404) {
+      toast.error("Resource not found");
+    } else if (error.response?.status === 500) {
+      toast.error("Server error. Please try again later.");
+    } else if (!error.response) {
+      toast.error("Network error. Please check your connection.");
+    } else {
+      toast.error(message);
+    }
+    
     return Promise.reject(error);
   }
 );

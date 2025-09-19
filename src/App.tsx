@@ -42,16 +42,9 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="/quiz"
-              element={
-                <ProtectedRoute>
-                  <QuizPage />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="/" element={<Navigate to="/questions" replace />} />
-            <Route path="*" element={<Navigate to="/questions" replace />} />
+            <Route path="/quiz" element={<QuizPage />} />
+            <Route path="/" element={<Navigate to="/quiz" replace />} />
+            <Route path="*" element={<Navigate to="/quiz" replace />} />
           </Routes>
           
           <ToastContainer

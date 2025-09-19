@@ -4,18 +4,18 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { quizService } from '../services/quizService';
 import { useQuizStore } from '../stores/quizStore';
+import { useAuthStore } from '../stores/authStore';
 import type { AxiosError } from 'axios';
 
 export const QuizPage: React.FC = () => {
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuthStore();
   const {
     questions,
     currentQuestionIndex,
     answers,
-    startTime,
     isSubmitting,
     lastQuizResult,
-    elapsedTime,
     setQuestions,
     startQuiz,
     resetQuiz,
@@ -26,7 +26,6 @@ export const QuizPage: React.FC = () => {
     getAnswerForQuestion,
     setSubmitting,
     setQuizResult,
-    setElapsedTime,
     incrementElapsedTime,
     isQuizComplete,
     getFormattedElapsedTime,
@@ -51,7 +50,7 @@ export const QuizPage: React.FC = () => {
       toast.success('Quiz submitted successfully!');
     },
     onError: (error: AxiosError<{ error?: string }>) => {
-      toast.error(error.response?.data?.error || 'Failed to submit quiz');
+      console.log(error);     
       setSubmitting(false);
     },
   });
@@ -118,7 +117,11 @@ export const QuizPage: React.FC = () => {
   };
 
   const handleBackToQuestions = () => {
-    navigate('/questions');
+    if (isAuthenticated) {
+      navigate('/questions');
+    } else {
+      navigate('/auth');
+    }
   };
 
   if (isLoading) {
@@ -209,7 +212,7 @@ export const QuizPage: React.FC = () => {
                 onClick={handleBackToQuestions}
                 className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-md font-medium"
               >
-                Back to Questions
+                {isAuthenticated ? 'Back to Questions' : 'Login to Manage Questions'}
               </button>
             </div>
           </div>
@@ -358,12 +361,21 @@ export const QuizPage: React.FC = () => {
             >
               Start Quiz
             </button>
-            <button
-              onClick={handleBackToQuestions}
-              className="w-full bg-gray-600 hover:bg-gray-700 text-white py-3 px-6 rounded-md font-medium"
-            >
-              Back to Questions
-            </button>
+            {isAuthenticated ? (
+              <button
+                onClick={handleBackToQuestions}
+                className="w-full bg-gray-600 hover:bg-gray-700 text-white py-3 px-6 rounded-md font-medium"
+              >
+                Back to Questions
+              </button>
+            ) : (
+              <button
+                onClick={handleBackToQuestions}
+                className="w-full bg-gray-600 hover:bg-gray-700 text-white py-3 px-6 rounded-md font-medium"
+              >
+                Login to Manage Questions
+              </button>
+            )}
           </div>
         </div>
       </div>

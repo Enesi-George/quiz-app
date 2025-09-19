@@ -3,7 +3,7 @@ import { api } from './api';
 
 export const questionsService = {
   async getQuestions(): Promise<QuizQuestion[]> {
-    const response = await api.get('/quiz/start');
+    const response = await api.get('/questions');
     return response.data;
   },
 

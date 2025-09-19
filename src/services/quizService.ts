@@ -1,14 +1,14 @@
 import type { QuizQuestion, QuizSubmissionRequest, QuizSubmissionResponse } from '../types';
-import { api } from './api';
+import { api, publicApi } from './api';
 
 export const quizService = {
   async startQuiz(): Promise<Omit<QuizQuestion, 'correct_answer' | 'created_by'>[]> {
-    const response = await api.get('/quiz/start');
+    const response = await publicApi.get('/public/quiz/start');
     return response.data;
   },
 
   async submitQuiz(submission: QuizSubmissionRequest): Promise<QuizSubmissionResponse> {
-    const response = await api.post('/quiz/submit', submission);
+    const response = await publicApi.post('/public/quiz/submit', submission);
     return response.data;
   },
 

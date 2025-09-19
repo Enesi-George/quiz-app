@@ -43,7 +43,7 @@ export const QuestionsPage: React.FC = () => {
       resetForm();
     },
     onError: (error: AxiosError<{ error?: string }>) => {
-      toast.error(error.response?.data?.error || 'Failed to create question');
+      console.log(error);
     },
   });
 
@@ -57,7 +57,7 @@ export const QuestionsPage: React.FC = () => {
       resetForm();
     },
     onError: (error: AxiosError<{ error?: string }>) => {
-      toast.error(error.response?.data?.error || 'Failed to update question');
+      console.log(error);
     },
   });
 
@@ -69,7 +69,7 @@ export const QuestionsPage: React.FC = () => {
       toast.success('Question deleted successfully!');
     },
     onError: (error: AxiosError<{ error?: string }>) => {
-      toast.error(error.response?.data?.error || 'Failed to delete question');
+      console.log(error);
     },
   });
 
@@ -173,7 +173,7 @@ export const QuestionsPage: React.FC = () => {
                   value={formData.question_text}
                   onChange={handleInputChange}
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Enter your question..."
                 />
               </div>
@@ -188,7 +188,7 @@ export const QuestionsPage: React.FC = () => {
                     name="option_a"
                     value={formData.option_a}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Option A"
                   />
                 </div>
@@ -201,7 +201,7 @@ export const QuestionsPage: React.FC = () => {
                     name="option_b"
                     value={formData.option_b}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Option B"
                   />
                 </div>
@@ -214,7 +214,7 @@ export const QuestionsPage: React.FC = () => {
                     name="option_c"
                     value={formData.option_c}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Option C"
                   />
                 </div>
@@ -227,7 +227,7 @@ export const QuestionsPage: React.FC = () => {
                     name="option_d"
                     value={formData.option_d}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Option D"
                   />
                 </div>
@@ -241,7 +241,7 @@ export const QuestionsPage: React.FC = () => {
                   name="correct_answer"
                   value={formData.correct_answer}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 >
                   <option value="A">Option A</option>
                   <option value="B">Option B</option>
