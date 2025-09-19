@@ -42,7 +42,8 @@ Create a `.env` file in the root directory:
 
 ```env
 # API Base URL (Backend Server)
-rename the .env.example to .env and update the values
+change the value of the VITE_API_URL to your backend server URL
+VITE_API_URL=http://
 ```
 
  **Note**: Make sure the backend server is running on the specified URL.
