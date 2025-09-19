@@ -27,7 +27,7 @@ Before running the application, ensure you have the following installed:
 
 ```bash
 # Navigate to the frontend directory
-cd frontend
+cd quiz-app
 ```
 
 ### 2. Install Dependencies
