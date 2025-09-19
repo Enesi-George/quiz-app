@@ -29,7 +29,7 @@ export const QuestionsPage: React.FC = () => {
   const queryClient = useQueryClient();
 
   // Fetch questions
-  const { data: questions = [], isLoading, error } = useQuery({
+  const { data: questions = [], isLoading } = useQuery({
     queryKey: ['questions'],
     queryFn: questionsService.getQuestions,
   });
